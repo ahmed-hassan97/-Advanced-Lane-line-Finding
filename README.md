@@ -133,7 +133,7 @@ def warper(img, src, dst):
 ```
 ---
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 4. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 After implementing all the steps, it's time to create the pipeline for one image. Created a function process_image() as the main pipeline function. Also, I put the Radius of Curvature and Center Offset on the final image using cv2.putText() function. The result is shown below: 
 
@@ -154,5 +154,111 @@ clip1 = VideoFileClip("project_video.mp4")
 white_clip = clip1.fl_image(process_image) #NOTE: this function expects color images!!
 %time white_clip.write_videofile(white_output, audio=False)
 
+```
+---
+### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+
+i face problem when i try to upload folder on colab but stack over flow help me in this i applay alot of technique which i have learned from this nanodegree like how to make calibration to my camera and how to undistortion images which come from camera 
+using math equation which i have learned in lesson and applay prespective transform to image to correct it using src and dest array 
+and applay how to cover line and calculate curvature of road by calculate width of road 3.7 meter and length camera 30 meter 
+and finally applay pipeline on the video stream 
+
+---
+```
+def process_image(image):
+    # TODO: put your pipeline here
+    initial_image = np.copy(image)
+
+    undistorted = cal_undistort(initial_image, objpoints, imgpoints)
+
+    #gray = cv2.cvtColor(undistorted, cv2.COLOR_RGB2GRAY)
+    hls = cv2.cvtColor(undistorted, cv2.COLOR_RGB2HLS)
+
+    s_channel = hls[:,:,2]
+
+    gray = cv2.cvtColor(undistorted, cv2.COLOR_RGB2GRAY)
+
+    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0) # Take the derivative in x
+
+    abs_sobelx = np.absolute(sobelx) # Absolute x derivative to accentuate lines away from horizontal
+
+    scaled_sobel = np.uint8(255*abs_sobelx/np.max(abs_sobelx))
+
+    sxbinary = np.zeros_like(scaled_sobel)
+
+    sxbinary[(scaled_sobel >= thresh_min) & (scaled_sobel <= thresh_max)] = 1
+
+    s_binary = np.zeros_like(s_channel)
+
+    s_binary[(s_channel >= s_thresh_min) & (s_channel <= s_thresh_max)] = 1
+
+    color_binary = np.dstack(( np.zeros_like(sxbinary), sxbinary, s_binary)) * 255
+
+    combined_binary = np.zeros_like(sxbinary)
+
+    combined_binary[(s_binary == 1) | (sxbinary == 1)] = 1
+
+    warped_image = warper(combined_binary, src, dst)
+
+    #result = fit_polynomial(warped_image)
+    #result = search_around_poly(warped_image)
+
+    curvature_string, offset = radius_and_offset(warped_image)
+
+    margin = 100
+
+    nonzero = warped_image.nonzero()
+
+    nonzeroy = np.array(nonzero[0])
+
+    nonzerox = np.array(nonzero[1])
+
+    left_lane_inds = ((nonzerox > (left_fit[0]*(nonzeroy**2) + left_fit[1]*nonzeroy + 
+                                   
+                    left_fit[2] - margin)) & (nonzerox < (left_fit[0]*(nonzeroy**2) + 
+                                                          
+                    left_fit[1]*nonzeroy + left_fit[2] + margin)))
+    
+    right_lane_inds = ((nonzerox > (right_fit[0]*(nonzeroy**2) + right_fit[1]*nonzeroy + 
+                                    
+                    right_fit[2] - margin)) & (nonzerox < (right_fit[0]*(nonzeroy**2) + 
+                                                           
+                    right_fit[1]*nonzeroy + right_fit[2] + margin)))
+    
+    leftx = nonzerox[left_lane_inds]
+
+    lefty = nonzeroy[left_lane_inds] 
+
+    rightx = nonzerox[right_lane_inds]
+
+    righty = nonzeroy[right_lane_inds]
+
+    left_fitx, right_fitx, ploty = fit_poly(warped_image.shape, leftx, lefty, rightx, righty)
+
+    warp_zero = np.zeros_like(warped_image).astype(np.uint8)
+
+    color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
+
+    pts_left = np.array([np.transpose(np.vstack([left_fitx, ploty]))])
+
+    pts_right = np.array([np.flipud(np.transpose(np.vstack([right_fitx, ploty])))])
+
+    pts = np.hstack((pts_left, pts_right))
+
+    cv2.fillPoly(color_warp, np.int_([pts]), (0,255, 0))
+
+    newwarp = cv2.warpPerspective(color_warp, M_inverse, img_size) 
+
+    result_final = cv2.addWeighted(undistorted, 1, newwarp, 0.3, 0)
+
+    cv2.putText(result_final,curvature_string , (125, 90), cv2.FONT_HERSHEY_SIMPLEX, 1.7, (255,255,255), thickness=4)
+
+    cv2.putText(result_final, offset, (125, 150), cv2.FONT_HERSHEY_SIMPLEX, 1.7, (255,255,255), thickness=4)
+
+    return result_final
+
+result_image = process_image(image123)
+
+plt.imshow(result_image, cmap='gray')
 ```
 End :raising_hand:
