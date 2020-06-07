@@ -1,6 +1,5 @@
 ## Advanced Lane Finding
 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 ![sdc-1-1024x427](https://user-images.githubusercontent.com/25509152/33837471-770be3a2-de9d-11e7-97cc-50c6224bfcc3.png)
 
 ---
@@ -19,10 +18,10 @@
 ## Overview :point_left:
 ---
 
-## in this project i will compined advanced technique in computer vision to find lane line
-## using camera calibration and how to undistortion image 
-## and make prespective transform on image
+## Advanced Lane Detection Project which includes advanced image processing to detect lanes irrespective of the road texture, ## brightness, contrast, curves etc. Used Image warping and sliding window approach to find and plot the lane lines. Also determined the real curvature of the lane and vehicle position with respect to center.
 
+---
+![](gif.gif)
 ---
 ## steps of project :
 ---
