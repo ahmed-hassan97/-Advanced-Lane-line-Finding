@@ -6,13 +6,14 @@
 ---
 ### Table of Contents
 ---
-*- 
 
-
-
-
-
-
+- Overview
+- steps of project
+- steps detail
+- pipeline
+- Test on videos
+- concolusion
+- end
 
 ---
 ## Overview :point_left:
@@ -22,10 +23,11 @@
 
 
 
+
 ---
 ## steps of project :
 ---
-1- Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
+### Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 
 2- Apply a distortion correction to raw images. Use color transforms, gradients, etc., to create a *thresholded binary image *bold text
 
@@ -43,3 +45,7 @@
 
 
 ---
+
+
+
+End :raising_hand:
