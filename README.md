@@ -261,4 +261,5 @@ result_image = process_image(image123)
 
 plt.imshow(result_image, cmap='gray')
 ```
+---
 End :raising_hand:
