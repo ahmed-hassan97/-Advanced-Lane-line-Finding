@@ -43,7 +43,20 @@
 
 
 ---
+## Camera Calibration
+---
 
+#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
+The first step in the pipeline is to undistort the camera. Some images of a 9x6 chessboard are given and are distorted. Our task is to find the Chessboard corners an plot them. For this, after loading the images we calibrate the camera. Open CV functions like findChessboardCorners(), drawChessboardCorners() and calibrateCamera() help us do this.
 
+---
+```
+def cal_undistort(img, objpoints, imgpoints):
+    # Use cv2.calibrateCamera() and cv2.undistort()
+    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
+    undist = cv2.undistort(img, mtx, dist, None, mtx)
+    print( dist)
+    return undist
+```
 End :raising_hand:
