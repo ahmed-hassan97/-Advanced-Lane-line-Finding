@@ -132,6 +132,23 @@ def warper(img, src, dst):
 
 ```
 ---
+### Finding the lines - Sliding Window and fitting a polynomial
+
+![output_1](https://user-images.githubusercontent.com/34116562/49129915-9bd3e800-f2f7-11e8-9d7b-7ee1480b480c.png)
+![output_2](https://user-images.githubusercontent.com/34116562/49129917-9c6c7e80-f2f7-11e8-8b37-4791cb2e60e3.png)
+![output_3](https://user-images.githubusercontent.com/34116562/49129920-9e364200-f2f7-11e8-9852-5e35607d7c07.png)
+![output_4](https://user-images.githubusercontent.com/34116562/49129924-9f676f00-f2f7-11e8-81fb-aa529361acfc.png)
+
+
+### Finding the lines - Search From Prior and fitting a polynomial
+
+![output_1](https://user-images.githubusercontent.com/34116562/49129956-b60dc600-f2f7-11e8-82e2-c8e48d9e3d3f.png)
+![output_2](https://user-images.githubusercontent.com/34116562/49129958-b73ef300-f2f7-11e8-9898-bada3f974564.png)
+![output_3](https://user-images.githubusercontent.com/34116562/49129959-b8702000-f2f7-11e8-9477-95f0ef30d523.png)
+![output_4](https://user-images.githubusercontent.com/34116562/49129961-b9a14d00-f2f7-11e8-8d33-315251f554fb.png)
+![output_5](https://user-images.githubusercontent.com/34116562/49129965-bb6b1080-f2f7-11e8-9d74-91581421f7f2.png)
+![output_6](https://user-images.githubusercontent.com/34116562/49129969-bdcd6a80-f2f7-11e8-8428-96e62595f872.png)
+---
 
 #### 4. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
