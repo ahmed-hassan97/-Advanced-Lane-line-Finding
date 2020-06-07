@@ -19,29 +19,28 @@
 ## Overview :point_left:
 ---
 
-
-
-
-
+## in this project i will compined advanced technique in computer vision to find lane line
+## using camera calibration and how to undistortion image 
+## and make prespective transform on image
 
 ---
 ## steps of project :
 ---
 ### Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 
-2- Apply a distortion correction to raw images. Use color transforms, gradients, etc., to create a *thresholded binary image *bold text
+### Apply a distortion correction to raw images. Use color transforms, gradients, etc., to create a thresholded binary image
 
-3- Apply a perspective transform to rectify binary image ("birds-eye view").
+### Apply a perspective transform to rectify binary image ("birds-eye view").
 
-4- Detect lane pixels and fit to find the lane boundary.
+### Detect lane pixels and fit to find the lane boundary.
 
-5- Determine the curvature of the lane and vehicle position with respect to center.
+### Determine the curvature of the lane and vehicle position with respect to center.
 
-6- Warp the detected lane boundaries back onto the original image.
+### Warp the detected lane boundaries back onto the original image.
 
-7- Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle
+### Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle
 
-8- applay this steps on video stream.
+### applay this steps on video stream.
 
 
 ---
