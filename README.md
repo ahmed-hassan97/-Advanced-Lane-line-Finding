@@ -132,4 +132,27 @@ def warper(img, src, dst):
 
 ```
 ---
+
+#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+
+After implementing all the steps, it's time to create the pipeline for one image. Created a function process_image() as the main pipeline function. Also, I put the Radius of Curvature and Center Offset on the final image using cv2.putText() function. The result is shown below: 
+
+##### Lane Area Drawn without Information:
+
+![output-without-info](https://user-images.githubusercontent.com/34116562/49130028-fec57f00-f2f7-11e8-8293-34e09bc07880.png)
+
+##### Lane Area Drawn with Radius of Curvature and Central Offset:
+
+![output-with-radius-and-offset](https://user-images.githubusercontent.com/34116562/49130030-008f4280-f2f8-11e8-8ed1-8a1aad84de5a.png)
+
+---
+## pipeline for video stream
+
+```
+white_output = 'test_videos_output/project_video_output.mp4'
+clip1 = VideoFileClip("project_video.mp4")
+white_clip = clip1.fl_image(process_image) #NOTE: this function expects color images!!
+%time white_clip.write_videofile(white_output, audio=False)
+
+```
 End :raising_hand:
